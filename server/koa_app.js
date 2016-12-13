@@ -5,10 +5,17 @@ const Koa = require('koa');
 const app = new Koa();
 const bodyParser = require('koa-bodyparser');
 const serve = require('koa-static');
+const compress = require('koa-compress');
 import router from './routes/koa_index';
 
 const port = process.env.PORT || 3000;
 
+//compress request
+app.use(compress({
+    //this option will pass into zlib and you can config more option.
+    // for more information please refer to node.js zlib module
+    threshold: 2048
+}));
 
 /**
  * use koa-static to serve static files
